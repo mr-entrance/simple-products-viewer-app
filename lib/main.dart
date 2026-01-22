@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:simple_product_viewer_app/injection_container.dart' as di;
 import 'package:simple_product_viewer_app/router.dart';
 
-void main() {
+void main() async {
+  di.init();
   runApp(const MyApp());
 }
 

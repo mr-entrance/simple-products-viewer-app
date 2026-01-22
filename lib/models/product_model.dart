@@ -3,10 +3,13 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
 
+// https://pub.dev/packages/freezed#deserializing-generic-classes
 @Freezed(genericArgumentFactories: true)
-sealed class ApiListResult<T> with _$ApiListResult<T> {
-  const factory ApiListResult.data(T data, String result) =
-      ApiListResultData<T>;
+abstract class ApiListResult<T> with _$ApiListResult<T> {
+  const factory ApiListResult({
+    required List<T> data,
+    required String message,
+  }) = _ApiListResult<T>;
 
   factory ApiListResult.fromJson(
     Map<String, dynamic> json,

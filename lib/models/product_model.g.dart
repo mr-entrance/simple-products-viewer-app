@@ -6,17 +6,20 @@ part of 'product_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ApiListResultData<T> _$ApiListResultDataFromJson<T>(
+_ApiListResult<T> _$ApiListResultFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
-) => ApiListResultData<T>(fromJsonT(json['data']), json['result'] as String);
+) => _ApiListResult<T>(
+  data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
+  message: json['message'] as String,
+);
 
-Map<String, dynamic> _$ApiListResultDataToJson<T>(
-  ApiListResultData<T> instance,
+Map<String, dynamic> _$ApiListResultToJson<T>(
+  _ApiListResult<T> instance,
   Object? Function(T value) toJsonT,
 ) => <String, dynamic>{
-  'data': toJsonT(instance.data),
-  'result': instance.result,
+  'data': instance.data.map(toJsonT).toList(),
+  'message': instance.message,
 };
 
 _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
