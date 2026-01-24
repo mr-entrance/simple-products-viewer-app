@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ApiListResult<T> {
 
- List<T> get data; String get message;
+ List<T> get data; String get result;
 /// Create a copy of ApiListResult
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ApiListResultCopyWith<T, ApiListResult<T>> get copyWith => _$ApiListResultCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApiListResult<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ApiListResult<T>&&const DeepCollectionEquality().equals(other.data, data)&&(identical(other.result, result) || other.result == result));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),message);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(data),result);
 
 @override
 String toString() {
-  return 'ApiListResult<$T>(data: $data, message: $message)';
+  return 'ApiListResult<$T>(data: $data, result: $result)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ApiListResultCopyWith<T,$Res>  {
   factory $ApiListResultCopyWith(ApiListResult<T> value, $Res Function(ApiListResult<T>) _then) = _$ApiListResultCopyWithImpl;
 @useResult
 $Res call({
- List<T> data, String message
+ List<T> data, String result
 });
 
 
@@ -65,10 +65,10 @@ class _$ApiListResultCopyWithImpl<T,$Res>
 
 /// Create a copy of ApiListResult
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? data = null,Object? result = null,}) {
   return _then(_self.copyWith(
 data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as List<T>,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as List<T>,result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -154,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<T> data,  String message)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<T> data,  String result)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ApiListResult() when $default != null:
-return $default(_that.data,_that.message);case _:
+return $default(_that.data,_that.result);case _:
   return orElse();
 
 }
@@ -175,10 +175,10 @@ return $default(_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<T> data,  String message)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<T> data,  String result)  $default,) {final _that = this;
 switch (_that) {
 case _ApiListResult():
-return $default(_that.data,_that.message);case _:
+return $default(_that.data,_that.result);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +195,10 @@ return $default(_that.data,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<T> data,  String message)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<T> data,  String result)?  $default,) {final _that = this;
 switch (_that) {
 case _ApiListResult() when $default != null:
-return $default(_that.data,_that.message);case _:
+return $default(_that.data,_that.result);case _:
   return null;
 
 }
@@ -210,7 +210,7 @@ return $default(_that.data,_that.message);case _:
 @JsonSerializable(genericArgumentFactories: true)
 
 class _ApiListResult<T> implements ApiListResult<T> {
-  const _ApiListResult({required final  List<T> data, required this.message}): _data = data;
+  const _ApiListResult({required final  List<T> data, required this.result}): _data = data;
   factory _ApiListResult.fromJson(Map<String, dynamic> json,T Function(Object?) fromJsonT) => _$ApiListResultFromJson(json,fromJsonT);
 
  final  List<T> _data;
@@ -220,7 +220,7 @@ class _ApiListResult<T> implements ApiListResult<T> {
   return EqualUnmodifiableListView(_data);
 }
 
-@override final  String message;
+@override final  String result;
 
 /// Create a copy of ApiListResult
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +235,16 @@ Map<String, dynamic> toJson(Object? Function(T) toJsonT) {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApiListResult<T>&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ApiListResult<T>&&const DeepCollectionEquality().equals(other._data, _data)&&(identical(other.result, result) || other.result == result));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),message);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_data),result);
 
 @override
 String toString() {
-  return 'ApiListResult<$T>(data: $data, message: $message)';
+  return 'ApiListResult<$T>(data: $data, result: $result)';
 }
 
 
@@ -255,7 +255,7 @@ abstract mixin class _$ApiListResultCopyWith<T,$Res> implements $ApiListResultCo
   factory _$ApiListResultCopyWith(_ApiListResult<T> value, $Res Function(_ApiListResult<T>) _then) = __$ApiListResultCopyWithImpl;
 @override @useResult
 $Res call({
- List<T> data, String message
+ List<T> data, String result
 });
 
 
@@ -272,10 +272,10 @@ class __$ApiListResultCopyWithImpl<T,$Res>
 
 /// Create a copy of ApiListResult
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? data = null,Object? result = null,}) {
   return _then(_ApiListResult<T>(
 data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as List<T>,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as List<T>,result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -499,13 +499,13 @@ return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_t
 @JsonSerializable()
 
 class _ProductModel implements ProductModel {
-   _ProductModel({required this.id, @JsonKey(name: 'SKU') required this.sku, required this.name, required this.brandName, required this.mainImage, required this.price, required final  List<String> sizes, required this.stockStatus, required this.colour, required this.description}): _sizes = sizes;
+   _ProductModel({required this.id, @JsonKey(name: 'SKU') required this.sku, required this.name, this.brandName = '', required this.mainImage, required this.price, required final  List<String> sizes, required this.stockStatus, required this.colour, required this.description}): _sizes = sizes;
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
 @override final  String id;
 @override@JsonKey(name: 'SKU') final  String sku;
 @override final  String name;
-@override final  String brandName;
+@override@JsonKey() final  String brandName;
 @override final  String mainImage;
 @override final  PriceModel price;
  final  List<String> _sizes;

@@ -11,7 +11,7 @@ _ApiListResult<T> _$ApiListResultFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) => _ApiListResult<T>(
   data: (json['data'] as List<dynamic>).map(fromJsonT).toList(),
-  message: json['message'] as String,
+  result: json['result'] as String,
 );
 
 Map<String, dynamic> _$ApiListResultToJson<T>(
@@ -19,7 +19,7 @@ Map<String, dynamic> _$ApiListResultToJson<T>(
   Object? Function(T value) toJsonT,
 ) => <String, dynamic>{
   'data': instance.data.map(toJsonT).toList(),
-  'message': instance.message,
+  'result': instance.result,
 };
 
 _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
@@ -27,7 +27,7 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       sku: json['SKU'] as String,
       name: json['name'] as String,
-      brandName: json['brandName'] as String,
+      brandName: json['brandName'] as String? ?? '',
       mainImage: json['mainImage'] as String,
       price: PriceModel.fromJson(json['price'] as Map<String, dynamic>),
       sizes: (json['sizes'] as List<dynamic>).map((e) => e as String).toList(),

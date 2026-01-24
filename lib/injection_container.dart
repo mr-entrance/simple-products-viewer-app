@@ -1,12 +1,15 @@
 import 'package:get_it/get_it.dart';
+import 'package:simple_product_viewer_app/screens/product_list/product_list_cubit.dart';
 import 'package:simple_product_viewer_app/services/api_client.dart';
 import 'package:simple_product_viewer_app/services/product_service.dart';
 
-final getIt = GetIt.instance;
+final sl = GetIt.instance;
 
 void init() {
   // core
-  getIt.registerLazySingleton<ApiClient>(() => ApiClient());
+  sl.registerLazySingleton<ApiClient>(() => ApiClient());
   // services
-  getIt.registerLazySingleton(() => ProductService(apiClient: getIt()));
+  sl.registerLazySingleton(() => ProductService(apiClient: sl()));
+  // cubits
+  sl.registerFactory(() => ProductListCubit(sl()));
 }

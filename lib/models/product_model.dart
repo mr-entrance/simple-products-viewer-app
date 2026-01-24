@@ -6,10 +6,8 @@ part 'product_model.g.dart';
 // https://pub.dev/packages/freezed#deserializing-generic-classes
 @Freezed(genericArgumentFactories: true)
 abstract class ApiListResult<T> with _$ApiListResult<T> {
-  const factory ApiListResult({
-    required List<T> data,
-    required String message,
-  }) = _ApiListResult<T>;
+  const factory ApiListResult({required List<T> data, required String result}) =
+      _ApiListResult<T>;
 
   factory ApiListResult.fromJson(
     Map<String, dynamic> json,
@@ -23,7 +21,7 @@ abstract class ProductModel with _$ProductModel {
     required String id,
     @JsonKey(name: 'SKU') required String sku,
     required String name,
-    required String brandName,
+    @Default('') String brandName,
     required String mainImage,
     required PriceModel price,
     required List<String> sizes,
