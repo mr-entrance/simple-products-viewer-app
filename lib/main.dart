@@ -13,6 +13,40 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(routerConfig: router);
+    return MaterialApp.router(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          primary: Colors.indigo,
+          seedColor: Colors.black,
+          secondary: Colors.green,
+          surface: Colors.grey[100]!,
+        ),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          surfaceTintColor: Colors.indigo,
+        ),
+        textTheme: const TextTheme(
+          labelLarge: TextStyle(color: Colors.black),
+          titleLarge: TextStyle(color: Colors.black),
+          displayLarge: TextStyle(color: Colors.black),
+          bodyMedium: TextStyle(color: Colors.black),
+          bodyLarge: TextStyle(color: Colors.black),
+        ),
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(foregroundColor: Colors.black),
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.indigo,
+            foregroundColor: Colors.white,
+            disabledBackgroundColor: Colors.grey,
+            disabledForegroundColor: Colors.white70,
+          ),
+        ),
+      ),
+
+      routerConfig: router,
+    );
   }
 }

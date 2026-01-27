@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
@@ -41,6 +42,11 @@ abstract class PriceModel with _$PriceModel {
 
   factory PriceModel.fromJson(Map<String, Object?> json) =>
       _$PriceModelFromJson(json);
+}
+
+extension PriceModelX on PriceModel {
+  String get formattedAmount =>
+      NumberFormat.simpleCurrency(name: currency).format(double.parse(amount));
 }
 
 enum StockStatus {
