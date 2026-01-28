@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
 import 'package:simple_product_viewer_app/screens/product_detail/product_detail_cubit.dart';
 import 'package:simple_product_viewer_app/screens/product_list/product_list_cubit.dart';
 import 'package:simple_product_viewer_app/services/api_client.dart';
@@ -14,4 +15,5 @@ void init() {
   // cubits
   sl.registerFactory(() => ProductListCubit(sl()));
   sl.registerFactory(() => ProductDetailCubit(sl()));
+  sl.registerLazySingleton(() => RecentlyViewedProductListCubit());
 }

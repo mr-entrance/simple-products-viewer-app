@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
 import 'package:simple_product_viewer_app/screens/product_detail/product_detail_cubit.dart';
 import 'package:simple_product_viewer_app/screens/product_detail/product_detail_state.dart';
+import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
 
 class ProductDetailScreen extends HookWidget {
   final String id;
@@ -13,7 +15,14 @@ class ProductDetailScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selectedSize = useState('');
-    return BlocBuilder<ProductDetailCubit, ProductDetailState>(
+    return BlocConsumer<ProductDetailCubit, ProductDetailState>(
+      listener: (context, state) {
+        if (state is ProductDetailLoadSuccess) {
+          context
+              .read<RecentlyViewedProductListCubit>()
+              .addProduct(state.product);
+        }
+      },
       builder: (context, state) {
         switch (state) {
           case ProductDetailLoadInProgress():
@@ -110,9 +119,10 @@ class ProductDetailScreen extends HookWidget {
                           SizedBox(height: 12),
                         ],
                         Text(product.description),
-                        SizedBox(height: 8),
+                        SizedBox(height: 12),
                         _buildProductInfo(product),
-                        SizedBox(height: 8),
+                        SizedBox(height: 12),
+                        RecentlyViewedProductList(),
                       ],
                     ),
                   ),

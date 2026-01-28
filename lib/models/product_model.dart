@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 part 'product_model.freezed.dart';
 part 'product_model.g.dart';
 
-// https://pub.dev/packages/freezed#deserializing-generic-classes
 @Freezed(genericArgumentFactories: true)
 abstract class ApiListResult<T> with _$ApiListResult<T> {
   const factory ApiListResult({required List<T> data, required String result}) =

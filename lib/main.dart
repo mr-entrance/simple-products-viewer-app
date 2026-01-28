@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
 import 'package:simple_product_viewer_app/injection_container.dart' as di;
 import 'package:simple_product_viewer_app/router.dart';
 
 void main() async {
   di.init();
-  runApp(const MyApp());
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => di.sl<RecentlyViewedProductListCubit>()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -45,7 +54,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-
       routerConfig: router,
     );
   }

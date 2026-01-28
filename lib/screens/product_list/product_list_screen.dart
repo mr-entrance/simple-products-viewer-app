@@ -5,6 +5,7 @@ import 'package:simple_product_viewer_app/models/product_model.dart';
 import 'package:simple_product_viewer_app/screens/product_list/product_list_cubit.dart';
 import 'package:simple_product_viewer_app/screens/product_list/product_list_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
 
 class ProductListScreen extends StatelessWidget {
   const ProductListScreen({super.key});
@@ -49,7 +50,7 @@ class ProductListScreen extends StatelessWidget {
                         final product = products[i];
                         return GestureDetector(
                           onTap: () {
-                            context.go('/products/${product.id}');
+                            context.push('/products/${product.id}');
                           },
                           child: Card(
                             color: Colors.white,
@@ -95,6 +96,15 @@ class ProductListScreen extends StatelessWidget {
                           ),
                         );
                       },
+                    ),
+                    SliverSafeArea(
+                      top: false,
+                      sliver: SliverPadding(
+                        padding: const EdgeInsets.all(12.0),
+                        sliver: SliverToBoxAdapter(
+                          child: RecentlyViewedProductList(),
+                        ),
+                      ),
                     ),
                   ],
                 ),

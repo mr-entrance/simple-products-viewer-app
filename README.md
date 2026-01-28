@@ -20,7 +20,23 @@ fvm flutter pub get
 fvm flutter run
 ```
 
-## Files copied from other sources
+## Files pasted from other sources
 
-.gitignore: copied partially from [this link](https://github.com/flutter/flutter/blob/master/.gitignore)
+I added comment out something like `//TODO copied from` OR `#TODO copied from`
+
+## Used references
+
+### Bloc
+
+https://bloclibrary.dev/flutter-bloc-concepts/#multiblocprovider
+
+### get_it
+https://flutter-it.dev/documentation/get_it/object_registration
+
+
+### go_router
+https://pub.dev/documentation/go_router/latest/topics/Get%20started-topic.html
+
+### freezed
+https://pub.dev/packages/freezed#deserializing-generic-classes
 
