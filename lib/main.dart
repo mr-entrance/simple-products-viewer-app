@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
 import 'package:simple_product_viewer_app/injection_container.dart' as di;
 import 'package:simple_product_viewer_app/router.dart';
+import 'package:simple_product_viewer_app/screens/cart/cart_cubit.dart';
 
 void main() async {
   di.init();
@@ -10,6 +11,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => di.sl<RecentlyViewedProductListCubit>()),
+        BlocProvider(create: (_) => di.sl<CartCubit>()),
       ],
       child: const MyApp(),
     ),

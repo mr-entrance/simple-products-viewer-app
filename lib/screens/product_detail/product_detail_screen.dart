@@ -2,8 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
+import 'package:simple_product_viewer_app/injection_container.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
+import 'package:simple_product_viewer_app/screens/cart/cart_cubit.dart';
 import 'package:simple_product_viewer_app/screens/product_detail/product_detail_cubit.dart';
 import 'package:simple_product_viewer_app/screens/product_detail/product_detail_state.dart';
 import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
@@ -15,12 +18,13 @@ class ProductDetailScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final selectedSize = useState('');
+    final isLoading = useState(false);
     return BlocConsumer<ProductDetailCubit, ProductDetailState>(
       listener: (context, state) {
         if (state is ProductDetailLoadSuccess) {
-          context
-              .read<RecentlyViewedProductListCubit>()
-              .addProduct(state.product);
+          context.read<RecentlyViewedProductListCubit>().addProduct(
+            state.product,
+          );
         }
       },
       builder: (context, state) {
@@ -132,15 +136,30 @@ class ProductDetailScreen extends HookWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ElevatedButton(
-                    onPressed: buttonEnabled
-                        ? () {
-                            // Add to cart action
+                    onPressed: buttonEnabled && !isLoading.value
+                        ? () async {
+                            isLoading.value = true;
+                            try {
+                              await sl<CartCubit>().addProduct(
+                                product: product,
+                                selectedSize: selectedSize.value,
+                              );
+                              if (!context.mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Added to cart')),
+                              );
+                              context.push('/cart');
+                            } finally {
+                              isLoading.value = false;
+                            }
                           }
                         : null,
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    child: Text('Add to Cart'),
+                    child: isLoading.value
+                        ? CircularProgressIndicator(color: Colors.white)
+                        : Text('Add to Cart'),
                   ),
                 ),
               ),

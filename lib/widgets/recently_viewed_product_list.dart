@@ -16,6 +16,7 @@ class RecentlyViewedProductList extends StatelessWidget {
           return const SizedBox.shrink();
         }
         return Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Align(
