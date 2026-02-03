@@ -7,7 +7,7 @@ import 'package:simple_product_viewer_app/cubits/product_list_cubit.dart';
 import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
 import 'package:simple_product_viewer_app/injection_container.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
-import 'package:simple_product_viewer_app/screens/cart/cart_cubit.dart';
+import 'package:simple_product_viewer_app/cubits/cart_cubit.dart';
 import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
 
 class ProductDetailScreen extends HookWidget {

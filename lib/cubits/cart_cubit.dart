@@ -1,7 +1,7 @@
 import 'package:simple_product_viewer_app/models/cart_item.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:simple_product_viewer_app/screens/cart/cart_state.dart';
+import 'package:simple_product_viewer_app/cubits/cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
   CartCubit() : super(const CartLoadSuccess(items: []));

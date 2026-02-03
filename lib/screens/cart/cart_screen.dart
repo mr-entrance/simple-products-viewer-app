@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_product_viewer_app/injection_container.dart';
 import 'package:simple_product_viewer_app/models/cart_item.dart';
-import 'package:simple_product_viewer_app/screens/cart/cart_cubit.dart';
+import 'package:simple_product_viewer_app/cubits/cart_cubit.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
-import 'package:simple_product_viewer_app/screens/cart/cart_state.dart';
+import 'package:simple_product_viewer_app/cubits/cart_state.dart';
 import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
 
 class CartScreen extends StatelessWidget {

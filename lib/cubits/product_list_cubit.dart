@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:simple_product_viewer_app/logger.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
-import 'package:simple_product_viewer_app/screens/product_list/product_list_state.dart';
+import 'package:simple_product_viewer_app/cubits/product_list_state.dart';
 import 'package:simple_product_viewer_app/services/product_service.dart';
 
 class ProductListCubit extends Cubit<ProductListState> {
