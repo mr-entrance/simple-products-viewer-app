@@ -13,9 +13,9 @@ class CartCubit extends Cubit<CartState> {
     final cartItems = _getCurrentCartItems();
     if (cartItems == null) return;
     try {
+      _validateSize(product, selectedSize);
       emit(CartLoadInProgress(items: cartItems));
       await Future.delayed(const Duration(seconds: 1)); // mock api delay
-      _validateSize(product, selectedSize);
       final existingItem = _findCartItem(cartItems, product.id, selectedSize);
       if (existingItem != null) {
         final updatedList = cartItems.map((item) {
@@ -76,8 +76,8 @@ class CartCubit extends Cubit<CartState> {
       _validateSize(product, selectedSize);
       emit(CartLoadInProgress(items: cartItems));
       await Future.delayed(const Duration(seconds: 1)); // mock api delay
-
       final currentItem = _findCartItem(cartItems, product.id, selectedSize);
+      // call remove product if quantity is 1 so block is not duplicated
       if (currentItem != null && currentItem.quantity > 1) {
         final updatedList = cartItems.map((item) {
           if (item.product.id == product.id &&
