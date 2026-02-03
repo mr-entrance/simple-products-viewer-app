@@ -15,7 +15,8 @@ final class CartLoadSuccess extends CartState {
 }
 
 final class CartLoadFailure extends CartState {
-  const CartLoadFailure({required this.message});
+  const CartLoadFailure({required this.items, required this.message});
+  final List<CartItem> items;
   final String message;
 }
 

@@ -10,34 +10,20 @@ class CartCubit extends Cubit<CartState> {
     required ProductModel product,
     String selectedSize = '',
   }) async {
+    final cartItems = _getCurrentCartItems();
+    if (cartItems == null) return;
     try {
-      final currentState = state as CartLoadSuccess;
-      final cartItems = currentState.items;
       emit(CartLoadInProgress(items: cartItems));
       await Future.delayed(const Duration(seconds: 1)); // mock api delay
-      // check
-      if (product.sizes.isNotEmpty && !product.sizes.contains(selectedSize)) {
-        emit(
-          CartLoadFailure(message: 'Selected product size is not available.'),
-        );
-        return;
-      }
-      final sameSizedExist = cartItems.any(
-        (p) => p.product.id == product.id && p.selectedSize == selectedSize,
-      );
-      if (sameSizedExist) {
-        final currentQuantity = cartItems
-            .firstWhere(
-              (p) =>
-                  p.product.id == product.id && p.selectedSize == selectedSize,
-            )
-            .quantity;
+      _validateSize(product, selectedSize);
+      final existingItem = _findCartItem(cartItems, product.id, selectedSize);
+      if (existingItem != null) {
         final updatedList = cartItems.map((item) {
           if (item.product.id == product.id &&
               item.selectedSize == selectedSize) {
             return CartItem(
               product: item.product,
-              quantity: currentQuantity + 1,
+              quantity: item.quantity + 1,
               selectedSize: item.selectedSize,
             );
           }
@@ -55,7 +41,7 @@ class CartCubit extends Cubit<CartState> {
       final updatedList = [newItem, ...cartItems];
       emit(CartLoadSuccess(items: updatedList));
     } catch (e) {
-      emit(CartLoadFailure(message: e.toString()));
+      emit(CartLoadFailure(items: cartItems, message: e.toString()));
     }
   }
 
@@ -63,23 +49,20 @@ class CartCubit extends Cubit<CartState> {
     required ProductModel product,
     String selectedSize = '',
   }) async {
+    final cartItems = _getCurrentCartItems();
+    if (cartItems == null) return;
     try {
-      // check
-      if (product.sizes.isNotEmpty && !product.sizes.contains(selectedSize)) {
-        throw Exception('Selected product size is not available.');
-      }
-      final currentState = state as CartLoadSuccess;
-      final cartItems = currentState.items;
+      _validateSize(product, selectedSize);
       emit(CartLoadInProgress(items: cartItems));
       await Future.delayed(const Duration(seconds: 1)); // mock api delay
-      final currentList = List<CartItem>.from(currentState.items);
+      final currentList = List<CartItem>.from(cartItems);
       // Remove the product from the list
       currentList.removeWhere(
         (p) => p.product.id == product.id && p.selectedSize == selectedSize,
       );
       emit(CartLoadSuccess(items: currentList));
     } catch (e) {
-      emit(CartLoadFailure(message: e.toString()));
+      emit(CartLoadFailure(items: cartItems, message: e.toString()));
     }
   }
 
@@ -87,20 +70,16 @@ class CartCubit extends Cubit<CartState> {
     required ProductModel product,
     String selectedSize = '',
   }) async {
+    final cartItems = _getCurrentCartItems();
+    if (cartItems == null) return;
     try {
-      // check
-      if (product.sizes.isNotEmpty && !product.sizes.contains(selectedSize)) {
-        throw Exception('Selected product size is not available.');
-      }
-      final currentState = state as CartLoadSuccess;
-      final cartItems = currentState.items;
+      _validateSize(product, selectedSize);
       emit(CartLoadInProgress(items: cartItems));
       await Future.delayed(const Duration(seconds: 1)); // mock api delay
-      final currentItem = currentState.items.firstWhere(
-        (p) => p.product.id == product.id && p.selectedSize == selectedSize,
-      );
-      if (currentItem.quantity > 1) {
-        final updatedList = currentState.items.map((item) {
+
+      final currentItem = _findCartItem(cartItems, product.id, selectedSize);
+      if (currentItem != null && currentItem.quantity > 1) {
+        final updatedList = cartItems.map((item) {
           if (item.product.id == product.id &&
               item.selectedSize == selectedSize) {
             return CartItem(
@@ -114,7 +93,31 @@ class CartCubit extends Cubit<CartState> {
         emit(CartLoadSuccess(items: updatedList));
       }
     } catch (e) {
-      emit(CartLoadFailure(message: e.toString()));
+      emit(CartLoadFailure(items: cartItems, message: e.toString()));
+    }
+  }
+
+  void _validateSize(ProductModel product, String selectedSize) {
+    if (product.sizes.isNotEmpty && !product.sizes.contains(selectedSize)) {
+      throw Exception('Selected product size is not available.');
+    }
+  }
+
+  List<CartItem>? _getCurrentCartItems() {
+    return switch (state) {
+      CartLoadSuccess(:final items) => items,
+      CartLoadFailure(:final items) => items,
+      _ => null,
+    };
+  }
+
+  CartItem? _findCartItem(List<CartItem> items, String productId, String size) {
+    try {
+      return items.firstWhere(
+        (item) => item.product.id == productId && item.selectedSize == size,
+      );
+    } catch (_) {
+      return null; // 見つからない場合
     }
   }
 }

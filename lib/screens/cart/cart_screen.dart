@@ -40,6 +40,8 @@ class CartScreen extends StatelessWidget {
                     )
                   else if (cartProducts is CartLoadSuccess)
                     _buildCartItemList(items: cartProducts.items)
+                  else if (cartProducts is CartLoadFailure)
+                    _buildCartItemList(items: cartProducts.items)
                   else if (cartProducts is CartLoadInProgress)
                     _buildCartItemList(
                       items: cartProducts.items,
