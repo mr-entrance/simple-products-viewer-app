@@ -6,6 +6,7 @@ import 'package:simple_product_viewer_app/models/cart_item.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
 import 'package:simple_product_viewer_app/screens/cart/cart_cubit.dart';
 import 'package:simple_product_viewer_app/cubits/product_list_cubit.dart';
+import 'package:simple_product_viewer_app/screens/cart/cart_state.dart';
 import 'package:simple_product_viewer_app/screens/product_list/product_list_state.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
@@ -41,16 +42,21 @@ class ProductListScreen extends HookWidget {
                       ),
                       actions: [
                         IconButton(
-                          icon: BlocBuilder<CartCubit, List<CartItem>>(
-                            builder: (context, cartProducts) {
+                          icon: BlocBuilder<CartCubit, CartState>(
+                            builder: (context, state) {
                               final icon = const Icon(Icons.shopping_cart);
-                              if (cartProducts.isEmpty) {
-                                return icon;
+                              switch (state) {
+                                case CartLoadSuccess():
+                                  if (state.items.isEmpty) {
+                                    return icon;
+                                  }
+                                  return Badge(
+                                    label: Text('${state.totalQuantity()}'),
+                                    child: icon,
+                                  );
+                                default:
+                                  return icon;
                               }
-                              return Badge(
-                                label: Text('${cartProducts.length}'),
-                                child: icon,
-                              );
                             },
                           ),
                           onPressed: () {
