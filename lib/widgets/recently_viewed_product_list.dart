@@ -6,7 +6,28 @@ import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cu
 import 'package:simple_product_viewer_app/models/product_model.dart';
 
 class RecentlyViewedProductList extends StatelessWidget {
-  const RecentlyViewedProductList({super.key});
+  final bool useSliver;
+  const RecentlyViewedProductList({super.key, this.useSliver = false});
+
+  @override
+  Widget build(BuildContext context) {
+    if (useSliver) {
+      return SliverSafeArea(
+        top: false,
+        sliver: SliverPadding(
+          padding: const EdgeInsets.all(12.0),
+          sliver: SliverToBoxAdapter(
+            child: _RecentlyViewedProductListContent(),
+          ),
+        ),
+      );
+    }
+    return _RecentlyViewedProductListContent();
+  }
+}
+
+class _RecentlyViewedProductListContent extends StatelessWidget {
+  const _RecentlyViewedProductListContent({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -88,15 +88,7 @@ class CartScreen extends StatelessWidget {
                     );
                   },
                 ),
-              SliverSafeArea(
-                top: false,
-                sliver: SliverPadding(
-                  padding: const EdgeInsets.all(12.0),
-                  sliver: SliverToBoxAdapter(
-                    child: RecentlyViewedProductList(),
-                  ),
-                ),
-              ),
+              RecentlyViewedProductList(useSliver: true),
             ],
           );
         },
