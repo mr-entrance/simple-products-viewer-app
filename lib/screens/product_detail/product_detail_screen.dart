@@ -5,7 +5,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simple_product_viewer_app/cubits/product_list_cubit.dart';
 import 'package:simple_product_viewer_app/cubits/recently_viewed_product_list_cubit.dart';
-import 'package:simple_product_viewer_app/injection_container.dart';
 import 'package:simple_product_viewer_app/models/product_model.dart';
 import 'package:simple_product_viewer_app/cubits/cart_cubit.dart';
 import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
@@ -66,7 +65,7 @@ class ProductDetailScreen extends HookWidget {
                     Row(
                       children: [
                         Text(
-                          product.brandName,
+                          product.brandName ?? 'No Brand',
                           style: TextStyle(color: Colors.grey[600]),
                         ),
                         Spacer(),
@@ -149,7 +148,7 @@ class ProductDetailScreen extends HookWidget {
                     ? () async {
                         isLoading.value = true;
                         try {
-                          await sl<CartCubit>().addProduct(
+                          await context.read<CartCubit>().addProduct(
                             product: product,
                             selectedSize: selectedSize.value,
                           );

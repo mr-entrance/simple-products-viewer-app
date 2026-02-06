@@ -27,7 +27,7 @@ _ProductModel _$ProductModelFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       sku: json['SKU'] as String,
       name: json['name'] as String,
-      brandName: json['brandName'] as String? ?? '',
+      brandName: json['brandName'] as String?,
       mainImage: json['mainImage'] as String,
       price: PriceModel.fromJson(json['price'] as Map<String, dynamic>),
       sizes: (json['sizes'] as List<dynamic>).map((e) => e as String).toList(),

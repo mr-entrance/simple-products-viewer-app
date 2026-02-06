@@ -11,9 +11,9 @@ void main() async {
   runApp(
     MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => di.sl<ProductListCubit>()),
-        BlocProvider(create: (_) => di.sl<RecentlyViewedProductListCubit>()),
-        BlocProvider(create: (_) => di.sl<CartCubit>()),
+        BlocProvider(create: (_) => ProductListCubit(di.sl())),
+        BlocProvider(create: (_) => RecentlyViewedProductListCubit()),
+        BlocProvider(create: (_) => CartCubit()),
       ],
       child: const MyApp(),
     ),

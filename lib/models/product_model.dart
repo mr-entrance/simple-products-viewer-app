@@ -21,7 +21,7 @@ abstract class ProductModel with _$ProductModel {
     required String id,
     @JsonKey(name: 'SKU') required String sku,
     required String name,
-    @Default('') String brandName,
+    String? brandName,
     required String mainImage,
     required PriceModel price,
     required List<String> sizes,

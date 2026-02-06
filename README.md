@@ -31,7 +31,7 @@ fvm flutter run
 
 ## Files pasted from other sources
 
-I added comment out something like `//TODO copied from` OR `#TODO copied from`
+I added comment out something like `//NOTE copied from` OR `#NOTE copied from`
 
 ## Used plugins and their documentations
 

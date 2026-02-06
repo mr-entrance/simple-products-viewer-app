@@ -117,7 +117,7 @@ class CartCubit extends Cubit<CartState> {
         (item) => item.product.id == productId && item.selectedSize == size,
       );
     } catch (_) {
-      return null; // 見つからない場合
+      return null;
     }
   }
 }

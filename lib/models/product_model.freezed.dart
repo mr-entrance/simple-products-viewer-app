@@ -287,7 +287,7 @@ as String,
 /// @nodoc
 mixin _$ProductModel {
 
- String get id;@JsonKey(name: 'SKU') String get sku; String get name; String get brandName; String get mainImage; PriceModel get price; List<String> get sizes; StockStatus get stockStatus; String get colour; String get description;
+ String get id;@JsonKey(name: 'SKU') String get sku; String get name; String? get brandName; String get mainImage; PriceModel get price; List<String> get sizes; StockStatus get stockStatus; String get colour; String get description;
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -320,7 +320,7 @@ abstract mixin class $ProductModelCopyWith<$Res>  {
   factory $ProductModelCopyWith(ProductModel value, $Res Function(ProductModel) _then) = _$ProductModelCopyWithImpl;
 @useResult
 $Res call({
- String id,@JsonKey(name: 'SKU') String sku, String name, String brandName, String mainImage, PriceModel price, List<String> sizes, StockStatus stockStatus, String colour, String description
+ String id,@JsonKey(name: 'SKU') String sku, String name, String? brandName, String mainImage, PriceModel price, List<String> sizes, StockStatus stockStatus, String colour, String description
 });
 
 
@@ -337,13 +337,13 @@ class _$ProductModelCopyWithImpl<$Res>
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? sku = null,Object? name = null,Object? brandName = null,Object? mainImage = null,Object? price = null,Object? sizes = null,Object? stockStatus = null,Object? colour = null,Object? description = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? sku = null,Object? name = null,Object? brandName = freezed,Object? mainImage = null,Object? price = null,Object? sizes = null,Object? stockStatus = null,Object? colour = null,Object? description = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,sku: null == sku ? _self.sku : sku // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,brandName: null == brandName ? _self.brandName : brandName // ignore: cast_nullable_to_non_nullable
-as String,mainImage: null == mainImage ? _self.mainImage : mainImage // ignore: cast_nullable_to_non_nullable
+as String,brandName: freezed == brandName ? _self.brandName : brandName // ignore: cast_nullable_to_non_nullable
+as String?,mainImage: null == mainImage ? _self.mainImage : mainImage // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as PriceModel,sizes: null == sizes ? _self.sizes : sizes // ignore: cast_nullable_to_non_nullable
 as List<String>,stockStatus: null == stockStatus ? _self.stockStatus : stockStatus // ignore: cast_nullable_to_non_nullable
@@ -443,7 +443,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'SKU')  String sku,  String name,  String brandName,  String mainImage,  PriceModel price,  List<String> sizes,  StockStatus stockStatus,  String colour,  String description)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'SKU')  String sku,  String name,  String? brandName,  String mainImage,  PriceModel price,  List<String> sizes,  StockStatus stockStatus,  String colour,  String description)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
 return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_that.price,_that.sizes,_that.stockStatus,_that.colour,_that.description);case _:
@@ -464,7 +464,7 @@ return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'SKU')  String sku,  String name,  String brandName,  String mainImage,  PriceModel price,  List<String> sizes,  StockStatus stockStatus,  String colour,  String description)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id, @JsonKey(name: 'SKU')  String sku,  String name,  String? brandName,  String mainImage,  PriceModel price,  List<String> sizes,  StockStatus stockStatus,  String colour,  String description)  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel():
 return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_that.price,_that.sizes,_that.stockStatus,_that.colour,_that.description);case _:
@@ -484,7 +484,7 @@ return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'SKU')  String sku,  String name,  String brandName,  String mainImage,  PriceModel price,  List<String> sizes,  StockStatus stockStatus,  String colour,  String description)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id, @JsonKey(name: 'SKU')  String sku,  String name,  String? brandName,  String mainImage,  PriceModel price,  List<String> sizes,  StockStatus stockStatus,  String colour,  String description)?  $default,) {final _that = this;
 switch (_that) {
 case _ProductModel() when $default != null:
 return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_that.price,_that.sizes,_that.stockStatus,_that.colour,_that.description);case _:
@@ -499,13 +499,13 @@ return $default(_that.id,_that.sku,_that.name,_that.brandName,_that.mainImage,_t
 @JsonSerializable()
 
 class _ProductModel implements ProductModel {
-   _ProductModel({required this.id, @JsonKey(name: 'SKU') required this.sku, required this.name, this.brandName = '', required this.mainImage, required this.price, required final  List<String> sizes, required this.stockStatus, required this.colour, required this.description}): _sizes = sizes;
+   _ProductModel({required this.id, @JsonKey(name: 'SKU') required this.sku, required this.name, this.brandName, required this.mainImage, required this.price, required final  List<String> sizes, required this.stockStatus, required this.colour, required this.description}): _sizes = sizes;
   factory _ProductModel.fromJson(Map<String, dynamic> json) => _$ProductModelFromJson(json);
 
 @override final  String id;
 @override@JsonKey(name: 'SKU') final  String sku;
 @override final  String name;
-@override@JsonKey() final  String brandName;
+@override final  String? brandName;
 @override final  String mainImage;
 @override final  PriceModel price;
  final  List<String> _sizes;
@@ -552,7 +552,7 @@ abstract mixin class _$ProductModelCopyWith<$Res> implements $ProductModelCopyWi
   factory _$ProductModelCopyWith(_ProductModel value, $Res Function(_ProductModel) _then) = __$ProductModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id,@JsonKey(name: 'SKU') String sku, String name, String brandName, String mainImage, PriceModel price, List<String> sizes, StockStatus stockStatus, String colour, String description
+ String id,@JsonKey(name: 'SKU') String sku, String name, String? brandName, String mainImage, PriceModel price, List<String> sizes, StockStatus stockStatus, String colour, String description
 });
 
 
@@ -569,13 +569,13 @@ class __$ProductModelCopyWithImpl<$Res>
 
 /// Create a copy of ProductModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? sku = null,Object? name = null,Object? brandName = null,Object? mainImage = null,Object? price = null,Object? sizes = null,Object? stockStatus = null,Object? colour = null,Object? description = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? sku = null,Object? name = null,Object? brandName = freezed,Object? mainImage = null,Object? price = null,Object? sizes = null,Object? stockStatus = null,Object? colour = null,Object? description = null,}) {
   return _then(_ProductModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,sku: null == sku ? _self.sku : sku // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,brandName: null == brandName ? _self.brandName : brandName // ignore: cast_nullable_to_non_nullable
-as String,mainImage: null == mainImage ? _self.mainImage : mainImage // ignore: cast_nullable_to_non_nullable
+as String,brandName: freezed == brandName ? _self.brandName : brandName // ignore: cast_nullable_to_non_nullable
+as String?,mainImage: null == mainImage ? _self.mainImage : mainImage // ignore: cast_nullable_to_non_nullable
 as String,price: null == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as PriceModel,sizes: null == sizes ? _self._sizes : sizes // ignore: cast_nullable_to_non_nullable
 as List<String>,stockStatus: null == stockStatus ? _self.stockStatus : stockStatus // ignore: cast_nullable_to_non_nullable

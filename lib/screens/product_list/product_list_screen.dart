@@ -8,8 +8,8 @@ import 'package:simple_product_viewer_app/cubits/cart_cubit.dart';
 import 'package:simple_product_viewer_app/cubits/product_list_cubit.dart';
 import 'package:simple_product_viewer_app/cubits/cart_state.dart';
 import 'package:simple_product_viewer_app/cubits/product_list_state.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:simple_product_viewer_app/widgets/recently_viewed_product_list.dart';
+import 'package:simple_product_viewer_app/widgets/product_card.dart';
 
 class ProductListScreen extends HookWidget {
   const ProductListScreen({super.key});
@@ -74,52 +74,11 @@ class ProductListScreen extends HookWidget {
                       itemCount: products.length,
                       itemBuilder: (c, i) {
                         final product = products[i];
-                        return GestureDetector(
+                        return ProductCard(
+                          product: product,
                           onTap: () {
                             context.push('/products/${product.id}');
                           },
-                          child: Card(
-                            color: Colors.white,
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: CachedNetworkImage(
-                                    imageUrl: product.mainImage,
-                                    fit: BoxFit.fitWidth,
-                                  ),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(6.0),
-                                  width: double.infinity,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(product.brandName),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        product.name,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        product.price.formattedAmount,
-                                        style: const TextStyle(
-                                          color: Colors.indigo,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
                         );
                       },
                     ),
